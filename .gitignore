@@ -1,0 +1,4 @@
+# local/auth artifacts — never commit
+gh_auth.log
+LST_Adjustment_Form_site.zip
+*.pdf

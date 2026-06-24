@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lone Star Tan — Month-End Inventory Adjustment Form</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <div class="masthead-inner">
+        <div class="brand">
+          <span class="brand-mark">LST</span>
+          <div class="brand-text">
+            <h1>Month-End Inventory Adjustment Form</h1>
+            <p class="subtitle">Record counted-vs-system discrepancies per product</p>
+          </div>
+        </div>
+        <div class="due-pill" id="duePill" title="Nominal due date is the 25th of each month">
+          Due by the 25th
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ HEADER FIELDS ============ -->
+      <section class="card">
+        <h2 class="card-title">Store &amp; Submission Info</h2>
+        <div class="grid-3">
+          <label class="field">
+            <span class="label-text">Employee Completing Form <em>*</em></span>
+            <input type="text" id="employee" autocomplete="name" placeholder="Your name" />
+            <span class="err" data-err="employee"></span>
+          </label>
+
+          <label class="field">
+            <span class="label-text">Store Market / Number <em>*</em></span>
+            <input type="text" id="store" list="storeList" placeholder="e.g. Market + store #" />
+            <datalist id="storeList"></datalist>
+            <span class="err" data-err="store"></span>
+          </label>
+
+          <label class="field">
+            <span class="label-text">Date <em>*</em></span>
+            <input type="date" id="date" />
+            <span class="err" data-err="date"></span>
+            <span class="hint" id="lateHint" hidden></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- ============ ADD PRODUCT ============ -->
+      <section class="card">
+        <div class="card-title-row">
+          <h2 class="card-title">Adjustments</h2>
+          <span class="counter" id="lineCounter">0 items</span>
+        </div>
+        <p class="card-help">
+          Enter only the products that are off. Search the catalog to add a row, then
+          enter the signed adjustment (counted minus system) and a reason.
+        </p>
+
+        <div class="adder">
+          <div class="combo" id="combo">
+            <input
+              type="text"
+              id="productSearch"
+              placeholder="Search ~270 products to add a row…"
+              autocomplete="off"
+              role="combobox"
+              aria-expanded="false"
+              aria-controls="comboList"
+            />
+            <ul class="combo-list" id="comboList" role="listbox" hidden></ul>
+          </div>
+          <button type="button" class="btn btn-ghost" id="writeInBtn" title="Add a product that is not in the catalog">
+            + Write-in product
+          </button>
+        </div>
+
+        <div class="lines" id="lines"></div>
+        <div class="empty-state" id="emptyState">
+          No adjustments added yet. Use the search above to add the items that are off.
+        </div>
+      </section>
+
+      <!-- ============ ACTIONS ============ -->
+      <section class="actions">
+        <div class="actions-left">
+          <button type="button" class="btn btn-secondary" id="previewBtn">Preview summary</button>
+          <button type="button" class="btn btn-secondary" id="downloadJsonBtn">Download JSON</button>
+          <button type="button" class="btn btn-secondary" id="downloadCsvBtn">Download CSV</button>
+        </div>
+        <div class="actions-right">
+          <button type="button" class="btn btn-primary" id="submitBtn">Review &amp; Submit</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>Lone Star Tan · Product &amp; Inventory · Reconciliation workstream</span>
+      <span id="catalogMeta"></span>
+    </footer>
+  </div>
+
+  <!-- ============ SUMMARY MODAL ============ -->
+  <div class="modal-backdrop" id="modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <h2 id="modalTitle">Submission Summary</h2>
+        <button type="button" class="icon-btn" id="modalClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-secondary" id="copyBtn">Copy summary</button>
+        <button type="button" class="btn btn-secondary" id="modalJsonBtn">Download JSON</button>
+        <button type="button" class="btn btn-secondary" id="modalCsvBtn">Download CSV</button>
+        <button type="button" class="btn btn-primary" id="mailtoBtn">Open email draft</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="catalog.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
