@@ -5,6 +5,14 @@ Form." Stores enter only the SKUs that are off; the form outputs clean structure
 data (JSON/CSV) so adjustments can be aggregated and bulk-applied to SunLync
 instead of being re-keyed ~600 times a month by hand.
 
+## Live demo
+
+**https://brycehildringadvisors.github.io/lst-inventory-adjustment-form/**
+
+Hosted on GitHub Pages from the `main` branch (repo:
+`brycehildringadvisors/lst-inventory-adjustment-form`). To update the live site,
+commit and `git push origin main` — Pages rebuilds automatically in ~1 minute.
+
 ## Run it
 
 No build step, no server, no dependencies. Just open **`index.html`** in any
